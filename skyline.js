@@ -16,9 +16,9 @@ var skyline = (function(){
     function draw() {
         var i = 0;
         var j = 0;
-        var rand = _rand(1,10);
+        var k = 0;
         var curWd = 0;
-        var width, bWidth, bHeight, bGap, bBase;
+        var width, bWidth, bHeight, bGap, bBase, rand;
         
         _ctx = canvas.getContext('2d');
 
@@ -28,41 +28,35 @@ var skyline = (function(){
         _ctx.beginPath();
         _ctx.moveTo(0,_h(0));
         for (; curWd<=width; curWd+=(bWidth+bGap)){
-            bWidth = _rand(40,100);
-            bGap = _rand(1,10);
+            bWidth = _rand(40,90);
+            bGap = _rand(0,10);
             bHeight = _rand(90,_cHt);
             bBase = _rand(10,80);
+            rand = _rand(1,Math.round(width/90));
             i+=1;
             j+=2;
-
-            if (i===rand) {
-            // Extra pointiness
-                _ctx.lineTo(curWd,_h(bBase));
-                _ctx.lineTo(bGap+curWd,_h(bBase));
-                _ctx.lineTo(bGap+curWd,_h(bHeight));
-                _ctx.lineTo(bWidth/2+bGap+curWd,_h(_cHt));
-                _ctx.lineTo(bWidth+bGap+curWd,_h(bHeight));
-                _ctx.lineTo(bWidth+bGap+curWd,_h(bBase));
-
-            } else if (j ===rand) {
-            // Extra pointiness
-                _ctx.lineTo(curWd,_h(bBase));
-                _ctx.lineTo(bGap+curWd,_h(bBase));
-                _ctx.lineTo(bGap+curWd,_h(bHeight));
+            k+=3;
+            
+            _ctx.lineTo(curWd,_h(bBase));
+            _ctx.lineTo(bGap+curWd,_h(bBase));
+            _ctx.lineTo(bGap+curWd,_h(bHeight));
+            
+            if (i===rand) { 
+                _ctx.lineTo(bWidth/2+bGap+curWd,_h(_rand(bHeight+20,_cHt)));            } 
+            else if (j===rand) {
                 _ctx.lineTo(bWidth/2-1+bGap+curWd,_h(bHeight));
                 _ctx.lineTo(bWidth/2-1+bGap+curWd,_h(bHeight+40));
                 _ctx.lineTo(bWidth/2+1+bGap+curWd,_h(bHeight+40));
                 _ctx.lineTo(bWidth/2+1+bGap+curWd,_h(bHeight));
-                _ctx.lineTo(bWidth+bGap+curWd,_h(bHeight));
-                _ctx.lineTo(bWidth+bGap+curWd,_h(bBase));
-
-            } else {
-                _ctx.lineTo(curWd,_h(bBase));
-                _ctx.lineTo(bGap+curWd,_h(bBase));
-                _ctx.lineTo(bGap+curWd,_h(bHeight));
-                _ctx.lineTo(bWidth+bGap+curWd,_h(bHeight));
-                _ctx.lineTo(bWidth+bGap+curWd,_h(bBase));
+            } else if (k===rand) {
+                _ctx.lineTo(bWidth*2.9/6+bGap+curWd,_h(bHeight+40));
+                _ctx.lineTo(bWidth*3/6+bGap+curWd,_h(bHeight+80));
+                _ctx.lineTo(bWidth*3.1/6+bGap+curWd,_h(bHeight+40));
             }
+
+            _ctx.lineTo(bWidth+bGap+curWd,_h(bHeight));
+            _ctx.lineTo(bWidth+bGap+curWd,_h(bBase));
+            
 
         }
         _ctx.lineTo(curWd,_h(0));
